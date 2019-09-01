@@ -1,6 +1,10 @@
 import * as PIXI from "pixi.js";
-import { Textures, Scene } from "../constants";
+import { Textures } from "../constants";
 
+/**
+ * Creates main character sprite.
+ * Adjust animation speed, and sprite's scale according to your preference.
+ */
 export const Character = () => {
   const resource = PIXI.Loader.shared.resources[Textures.Character];
   const sprite = new PIXI.AnimatedSprite(resource.spritesheet!.animations.idle);

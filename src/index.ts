@@ -5,6 +5,13 @@ import { Platform } from "./components/Platform";
 import { Background } from "./components/Background";
 import { Character } from "./components/character";
 
+/**
+ * Initializes game.
+ * 1. Gets canvas element and set its height and width.
+ * 2. Gets instance of PIXI Application.
+ * 3. Loads textures and levels.
+ * 5. Create game components. Adds them to PIXI Container. The order of adding components matter.
+ */
 const initGame = async () => {
   const canvasEl = getCanvasEl("game");
   canvasEl.height = Scene.height;

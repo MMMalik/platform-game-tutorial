@@ -1,0 +1,24 @@
+{
+  "name": "platform-game-tutorial",
+  "version": "1.0.0",
+  "description": "Tutorial for creating a platform game",
+  "main": "index.js",
+  "author": "Michał Malik",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "build": "NODE_ENV=production webpack"
+  },
+  "dependencies": {
+    "pixi.js": "^5.1.1"
+  },
+  "devDependencies": {
+    "typescript": "^3.6.2",
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.1",
+    "webpack-dev-server": "^3.3.1",
+    "copy-webpack-plugin": "^5.0.3",
+    "html-webpack-plugin": "^3.2.0",
+    "awesome-typescript-loader": "^5.2.1"
+  }
+}

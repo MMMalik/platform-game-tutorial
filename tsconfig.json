@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "module": "esNext",
+    "target": "es5",
+    "noImplicitAny": true,
+    "allowSyntheticDefaultImports": true,
+    "strictNullChecks": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true
+  }
+}

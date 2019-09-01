@@ -22,4 +22,5 @@ Assets used for this game were downloaded from https://itch.io/game-assets/free:
 * Pixel adventurer by rvros: https://rvros.itch.io/animated-pixel-hero
 
 Software used to produce spritesheets: https://www.piskelapp.com/
+
 Software used to create tiled maps: https://www.mapeditor.org/

@@ -3,7 +3,7 @@ import { createPixiApp, getCanvasEl, loadPixiAssets } from "./framework";
 import { Scene, Textures } from "./constants";
 import { Platform } from "./components/Platform";
 import { Background } from "./components/Background";
-import { Character } from "./components/character";
+import { Character } from "./components/Character";
 
 /**
  * Initializes game.

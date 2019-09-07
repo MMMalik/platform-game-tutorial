@@ -23,8 +23,10 @@ const initGame = async () => {
     height: Scene.height
   });
 
-  await loadPixiAssets(Textures);
-  const level = await import("./assets/levels/level1.json");
+  const [_, level] = await Promise.all([
+    loadPixiAssets(Textures),
+    import("./assets/levels/level1.json")
+  ]);
 
   const background = Background();
   const platform = Platform(level);

@@ -1,15 +1,16 @@
 import * as PIXI from "pixi.js";
-import { RawTileMap, createLevel } from "../framework";
+import { RawTileMap, createLevel, noop, GameComponent } from "../framework";
 import { Textures } from "../constants";
+import { GameState } from "../state";
 
 /**
  * Creates platform tiles.
  *
  * @param rawTiles json file exported from Tiled
  */
-export const Platform = (rawTiles: RawTileMap) => {
+export const Platform: GameComponent<GameState> = state => {
   const resource = PIXI.Loader.shared.resources[Textures.Platform];
-  return createLevel(rawTiles).map(tile => {
+  const sprites = state.level.map(tile => {
     const sprite = new PIXI.Sprite(
       resource.textures![`Tileset${tile.tileId - 1}.png`]
     );
@@ -17,4 +18,8 @@ export const Platform = (rawTiles: RawTileMap) => {
     sprite.y = tile.y;
     return sprite;
   });
+  return {
+    sprites,
+    render: noop
+  };
 };

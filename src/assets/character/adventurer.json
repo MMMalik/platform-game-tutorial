@@ -1447,6 +1447,21 @@
       "adventurer1.png",
       "adventurer2.png",
       "adventurer3.png"
+    ],
+    "running": [
+      "adventurer8.png",
+      "adventurer9.png",
+      "adventurer10.png",
+      "adventurer11.png",
+      "adventurer12.png",
+      "adventurer13.png"
+    ],
+    "jumping": [
+      "adventurer16.png"
+    ],
+    "falling": [
+      "adventurer22.png",
+      "adventurer23.png"
     ]
   },
   "meta": {

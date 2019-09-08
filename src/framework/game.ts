@@ -1,10 +1,48 @@
 import * as PIXI from "pixi.js";
 
-interface AppConfig {
+export interface AppConfig {
   view: HTMLCanvasElement;
   width: number;
   height: number;
 }
+
+export type RenderFn<T> = (sprites: PIXI.DisplayObject[], state: T) => void;
+
+export type GameComponent<T> = (
+  state: T
+) => {
+  sprites: PIXI.DisplayObject[];
+  render: RenderFn<T>;
+};
+
+/**
+ * Initializes game components.
+ *
+ * @param app instance of Pixi Application
+ * @param components array of game components
+ * @param state game state
+ */
+export const initializeComponents = <T>(
+  app: PIXI.Application,
+  components: GameComponent<T>[],
+  state: T
+) => {
+  const container = new PIXI.Container();
+  components.forEach(component => {
+    const cmp = component(state);
+    cmp.sprites.forEach(sprite => {
+      container.addChild(sprite);
+    });
+    app.ticker.add(() => {
+      cmp.render(cmp.sprites, state);
+    });
+  });
+
+  return () => {
+    app.stage.addChild(container);
+    app.renderer.render(app.stage);
+  };
+};
 
 /**
  * Gets canvas element from DOM.

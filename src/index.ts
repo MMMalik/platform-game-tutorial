@@ -1,9 +1,16 @@
-import * as PIXI from "pixi.js";
-import { createPixiApp, getCanvasEl, loadPixiAssets } from "./framework";
+import {
+  createPixiApp,
+  getCanvasEl,
+  loadPixiAssets,
+  initializeComponents,
+  createLevel
+} from "./framework";
 import { Scene, Textures } from "./constants";
 import { Platform } from "./components/Platform";
 import { Background } from "./components/Background";
 import { Character } from "./components/Character";
+import { initState } from "./state";
+import { State } from "./components/State";
 
 /**
  * Initializes game.
@@ -14,13 +21,13 @@ import { Character } from "./components/Character";
  */
 const initGame = async () => {
   const canvasEl = getCanvasEl("game");
-  canvasEl.height = Scene.height;
-  canvasEl.width = Scene.width;
+  canvasEl.height = Scene.Height;
+  canvasEl.width = Scene.Width;
 
   const pixiApp = createPixiApp({
     view: canvasEl,
-    width: Scene.width,
-    height: Scene.height
+    width: Scene.Width,
+    height: Scene.Height
   });
 
   const [_, level] = await Promise.all([
@@ -28,18 +35,12 @@ const initGame = async () => {
     import("./assets/levels/level1.json")
   ]);
 
-  const background = Background();
-  const platform = Platform(level);
-  const character = Character();
-
-  const container = new PIXI.Container();
-
-  container.addChild(background);
-  platform.forEach(platformSprite => container.addChild(platformSprite));
-  container.addChild(character);
-
-  pixiApp.stage.addChild(container);
-  pixiApp.renderer.render(pixiApp.stage);
+  const initializer = initializeComponents(
+    pixiApp,
+    [State, Background, Platform, Character],
+    initState({ level: createLevel(level) })
+  );
+  initializer();
 };
 
 initGame();

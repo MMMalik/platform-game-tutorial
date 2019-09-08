@@ -19,7 +19,7 @@ export const World = {
   Character: {
     Speed: 2,
     JumpSpeed: 3,
-    JumpThreshold: 75
+    JumpThreshold: 50
   },
   Gravity: 3
 };

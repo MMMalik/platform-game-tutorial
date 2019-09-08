@@ -11,6 +11,8 @@ export interface ParsedTile {
   tileId: number;
   x: number;
   y: number;
+  width: number;
+  height: number;
 }
 
 export enum TileId {
@@ -36,7 +38,9 @@ export const createLevel = (rawTiles: RawTileMap): ParsedTile[] => {
         id: `${i}_${j}`,
         tileId,
         x: rawTiles.tilewidth * j,
-        y: rawTiles.tileheight * i
+        y: rawTiles.tileheight * i,
+        width: rawTiles.tilewidth,
+        height: rawTiles.tileheight
       }));
     })
     .reduce((acc, row) => row.concat(acc), [])

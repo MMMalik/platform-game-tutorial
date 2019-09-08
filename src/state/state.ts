@@ -29,7 +29,7 @@ export const initState = ({ level }: InitProps): GameState => ({
   level,
   world: {
     character: {
-      x: Scene.Width / 2,
+      x: 50,
       y: Scene.Height / 2,
       vX: 0,
       vY: 0,

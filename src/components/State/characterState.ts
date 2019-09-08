@@ -1,22 +1,15 @@
 import { KeyboardState } from "../../framework";
 import { GameState } from "../../state";
-import {
-  World,
-  CharacterDirections,
-  CharacterMode,
-  Scene
-} from "../../constants";
+import { World, CharacterDirections, CharacterMode } from "../../constants";
+import { CharacterCollisions } from "./characterCollisions";
 
-const getCharacterMoveDirection = (
-  keyboard: KeyboardState,
-  prevDirection: number
-) => {
+export const getCharacterMoveDirection = (keyboard: KeyboardState) => {
   if (keyboard.ArrowRight) {
     return CharacterDirections.Right;
   } else if (keyboard.ArrowLeft) {
     return CharacterDirections.Left;
   }
-  return prevDirection;
+  return 0;
 };
 
 const isCharacterMovingX = (keyboard: KeyboardState) =>
@@ -56,35 +49,38 @@ const getCharacterJump = (
   return 0;
 };
 
-const getCharacterVy = (jumping: boolean, onTheGround: boolean) => {
-  if (jumping) {
-    return -World.Character.JumpSpeed;
-  }
-  return onTheGround ? 0 : World.Gravity;
+const getCharacterVy = (jumping: boolean, collisions: CharacterCollisions) => {
+  return jumping
+    ? -World.Character.JumpSpeed
+    : World.Gravity + collisions.platform.v;
 };
 
-const getCharacterVx = (movingX: boolean, moveDirection: number) => {
-  return movingX ? moveDirection * World.Character.Speed : 0;
+const getCharacterVx = (
+  movingX: boolean,
+  moveDirection: number,
+  collisions: CharacterCollisions
+) => {
+  return movingX
+    ? moveDirection * World.Character.Speed + collisions.platform.h
+    : 0;
 };
 
-const isOnTheGround = (prevY: number) => {
-  return prevY >= Scene.Height / 2;
+const isOnTheGround = (collisions: CharacterCollisions) => {
+  return Math.abs(collisions.platform.v) !== 0;
 };
 
 export const calculateCharacterState = (
   { world }: GameState,
-  keyboard: KeyboardState
+  direction: number,
+  keyboard: KeyboardState,
+  collisions: CharacterCollisions
 ) => {
   const movingX = isCharacterMovingX(keyboard);
-  const direction = getCharacterMoveDirection(
-    keyboard,
-    world.character.direction
-  );
-  const onTheGround = isOnTheGround(world.character.y);
+  const onTheGround = isOnTheGround(collisions);
   const jump = getCharacterJump(keyboard, world.character.jump, onTheGround);
   const jumping = isCharacterJumping(jump);
-  const vY = getCharacterVy(jumping, onTheGround);
-  const vX = getCharacterVx(movingX, direction);
+  const vY = getCharacterVy(jumping, collisions);
+  const vX = getCharacterVx(movingX, direction, collisions);
   const mode = getCharacterMode(movingX, jumping, onTheGround);
 
   return {

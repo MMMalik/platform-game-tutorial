@@ -10,16 +10,19 @@ import { GameState } from "../state";
  */
 export const Platform: GameComponent<GameState> = state => {
   const resource = PIXI.Loader.shared.resources[Textures.Platform];
-  const sprites = state.level.map(tile => {
+
+  const container = new PIXI.Container();
+  state.level.forEach(tile => {
     const sprite = new PIXI.Sprite(
       resource.textures![`Tileset${tile.tileId - 1}.png`]
     );
     sprite.x = tile.x;
     sprite.y = tile.y;
-    return sprite;
+    container.addChild(sprite);
   });
+
   return {
-    sprites,
+    displayObject: container,
     render: noop
   };
 };

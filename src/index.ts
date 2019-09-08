@@ -9,8 +9,8 @@ import { Scene, Textures } from "./constants";
 import { Platform } from "./components/Platform";
 import { Background } from "./components/Background";
 import { Character } from "./components/Character";
-import { initState } from "./state";
 import { State } from "./components/State";
+import { initState } from "./state";
 
 /**
  * Initializes game.
@@ -40,6 +40,7 @@ const initGame = async () => {
     [State, Background, Platform, Character],
     initState({ level: createLevel(level) })
   );
+  
   initializer();
 };
 

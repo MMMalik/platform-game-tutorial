@@ -16,7 +16,7 @@ export const Background: GameComponent<GameState> = () => {
   sprite.width = Scene.Width;
   sprite.height = Scene.Height;
   return {
-    sprites: [sprite],
+    displayObject: sprite,
     render: noop
   };
 };

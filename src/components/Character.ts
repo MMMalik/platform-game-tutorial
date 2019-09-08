@@ -10,23 +10,22 @@ const CharacterTextures = {
   [CharacterMode.Falling]: "falling"
 };
 
-const render: RenderFn<GameState> = (sprites, state) => {
+const render: RenderFn<GameState> = (sprite: PIXI.AnimatedSprite, state) => {
   const { world } = state;
   const resource = PIXI.Loader.shared.resources[Textures.Character];
-  sprites.forEach((sprite: PIXI.AnimatedSprite) => {
-    sprite.scale.x = Math.abs(sprite.scale.x) * world.character.direction;
+  sprite.scale.x = Math.abs(sprite.scale.x) * world.character.direction;
 
-    sprite.x += world.character.vX;
-    sprite.y += world.character.vY;
+  sprite.x += world.character.vX;
+  sprite.y += world.character.vY;
 
-    resource.spritesheet!.animations;
-    const currentAnimation = CharacterTextures[world.character.mode];
-    const currentTextures = resource.spritesheet!.animations[currentAnimation];
-    if (sprite.textures !== currentTextures) {
-      sprite.textures = currentTextures;
-      sprite.play();
-    }
-  });
+  resource.spritesheet!.animations;
+  const currentAnimation = CharacterTextures[world.character.mode];
+  const currentTextures = resource.spritesheet!.animations[currentAnimation];
+
+  if (sprite.textures !== currentTextures) {
+    sprite.textures = currentTextures;
+    sprite.play();
+  }
 };
 
 /**
@@ -44,7 +43,7 @@ export const Character: GameComponent<GameState> = state => {
   sprite.play();
   sprite.animationSpeed = 0.1;
   return {
-    sprites: [sprite],
+    displayObject: sprite,
     render
   };
 };

@@ -1,10 +1,12 @@
 ### Platform game tutorial
 
-This is a repository for multi-part tutorial on game development.
+This is a repository for multi-part tutorial on platform game development with Typescript and PixiJS.
 
-You can find full tutorial under the following link:
+You can find full tutorial on Medium under following links:
 
-https://test.com
+[Part 1](https://medium.com/@michalmmalik/platform-game-with-pixijs-part-1-ca2ed93c0808)
+[Part 2](https://medium.com/@michalmmalik/platform-game-with-pixijs-part-2-201e465df87b)
+[Part 3](https://medium.com/@michalmmalik/platform-game-with-pixijs-part-3-a44c873e895b)
 
 ### Start development
 
